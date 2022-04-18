@@ -1,0 +1,124 @@
+CREATE TABLE IF NOT EXISTS public.cars
+(
+    id integer NOT NULL DEFAULT nextval('cars_id_seq'::regclass),
+    booking boolean,
+    placement text COLLATE pg_catalog."default",
+    specialoffer text COLLATE pg_catalog."default",
+    price double precision,
+    additional text COLLATE pg_catalog."default",
+    releasedate date,
+    equipment text COLLATE pg_catalog."default",
+    parent_id integer,
+    manager_id integer,
+    CONSTRAINT cars_pkey PRIMARY KEY (id)
+)
+
+CREATE TABLE IF NOT EXISTS public.carsclass
+(
+    id integer NOT NULL DEFAULT nextval('carsclass_id_seq'::regclass),
+    brand text COLLATE pg_catalog."default",
+    model text COLLATE pg_catalog."default",
+    description text COLLATE pg_catalog."default",
+    characteristics text COLLATE pg_catalog."default",
+    CONSTRAINT carsclass_pkey PRIMARY KEY (id)
+)
+
+CREATE TABLE IF NOT EXISTS public.clients
+(
+    id integer NOT NULL DEFAULT nextval('clients_id_seq'::regclass),
+    fio text COLLATE pg_catalog."default",
+    phonenumber text COLLATE pg_catalog."default",
+    email text COLLATE pg_catalog."default",
+    passportdata text COLLATE pg_catalog."default",
+    manager_id integer,
+    requisites text COLLATE pg_catalog."default",
+    CONSTRAINT clients_pkey PRIMARY KEY (id),
+    CONSTRAINT fk_manager FOREIGN KEY (manager_id)
+        REFERENCES public.managers (id)
+)
+
+CREATE TABLE IF NOT EXISTS public.contracts
+(
+    id integer NOT NULL DEFAULT nextval('contracts_id_seq'::regclass),
+    companyinformation text COLLATE pg_catalog."default",
+    companyrequisites text COLLATE pg_catalog."default",
+    clientrequisites text COLLATE pg_catalog."default",
+    price double precision,
+    date date,
+    car_id integer,
+    client_id integer,
+    CONSTRAINT contracts_pkey PRIMARY KEY (id)
+)
+
+CREATE TABLE IF NOT EXISTS public.managers
+(
+    id integer NOT NULL DEFAULT nextval('managers_id_seq'::regclass),
+    fio text COLLATE pg_catalog."default",
+    phonenumber text COLLATE pg_catalog."default",
+    email text COLLATE pg_catalog."default",
+    passportdata text COLLATE pg_catalog."default",
+    post text COLLATE pg_catalog."default",
+    requisites text COLLATE pg_catalog."default",
+    CONSTRAINT managers_pkey PRIMARY KEY (id)
+)
+
+CREATE TABLE IF NOT EXISTS public.products
+(
+    id integer NOT NULL DEFAULT nextval('products_id_seq'::regclass),
+    type text COLLATE pg_catalog."default",
+    name text COLLATE pg_catalog."default",
+    characteristicts text COLLATE pg_catalog."default",
+    description text COLLATE pg_catalog."default",
+    price double precision,
+    CONSTRAINT products_pkey PRIMARY KEY (id)
+)
+
+CREATE TABLE IF NOT EXISTS public.soldcars
+(
+    id integer NOT NULL DEFAULT nextval('soldcars_id_seq'::regclass),
+    solddate date,
+    car_id integer,
+    contractnumber integer,
+    manager_id integer,
+    CONSTRAINT soldcars_pkey PRIMARY KEY (id)
+)
+
+CREATE TABLE IF NOT EXISTS public.soldproducts
+(
+    id integer NOT NULL DEFAULT nextval('soldproducts_id_seq'::regclass),
+    checknumber integer,
+    date date,
+    product_id integer,
+    manager_id integer,
+    CONSTRAINT soldproducts_pkey PRIMARY KEY (id),
+    CONSTRAINT fk_manager FOREIGN KEY (manager_id)
+        REFERENCES public.managers (id),
+    CONSTRAINT fk_product FOREIGN KEY (product_id)
+        REFERENCES public.products (id)
+)
+
+CREATE TABLE IF NOT EXISTS public."ProductsToSold"
+(
+    order_id integer NOT NULL,
+    product_id integer NOT NULL,
+    CONSTRAINT "ProductsToSold_pkey" PRIMARY KEY (order_id, product_id),
+    CONSTRAINT fk_orders FOREIGN KEY (order_id)
+        REFERENCES public.soldproducts (id)
+    CONSTRAINT fk_product FOREIGN KEY (product_id)
+        REFERENCES public.products (id)
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
