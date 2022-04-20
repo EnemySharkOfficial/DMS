@@ -36,5 +36,5 @@
 
 # 5. Макеты предполагаемого интерфейса сайта
 	Начальная страница пользовательского сайта
-	![Страница каталога](https://github.com/EnemySharkOfficial/DMS/blob/main/Lab%201/Site/Site%20layout/Catalog_page.png)
+![Страница каталога](https://github.com/EnemySharkOfficial/DMS/blob/main/Lab%201/Site/Site%20layout/Catalog_page.png)
 
