@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "ZNeFEBjpJ5jYDOE0cAcZNnmAQNxpeY8+riK6faSLoDE=",
+  "Source": "DBMS_API",
+  "BasePath": "_content/DBMS_API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
